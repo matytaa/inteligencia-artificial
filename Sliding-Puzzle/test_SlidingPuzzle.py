@@ -12,13 +12,21 @@ class test_SlidingPuzzle(unittest.TestCase):
 		self.miPuzzle.mostrarPuzzle()
 
 	def test_realizar_intercambio_hacia_abajo(self):
-		self.miPuzzle.down(0,1)
+		resultado = self.miPuzzle.down(0,1)
+		matrizEsperada = [[1,4,5],[6,0,7],[2,3,8]]
+		self.assertEqual(resultado, matrizEsperada)
 
 	def test_realizar_intercambio_hacia_izquierda(self):
-		self.miPuzzle.left(0,1)
+		resultado = self.miPuzzle.left(0,1)
+		matrizEsperada = [[0,1,5],[6,4,7],[2,3,8]]
+		self.assertEqual(resultado, matrizEsperada)
 		
 	def test_realizar_intercambio_hacia_derecha(self):
-		self.miPuzzle.right(0,1)
+		resultado = self.miPuzzle.right(0,1)
+		matrizEsperada = [[1,5,0],[6,4,7],[2,3,8]]
+		self.assertEqual(resultado, matrizEsperada)
 
 	def test_realizar_intercambio_hacia_arriba(self):
-		self.miPuzzle.up(0,1)
+		resultado = self.miPuzzle.up(0,1)
+		matrizEsperada = [[1,0,5],[6,4,7],[2,3,8]]
+		self.assertEqual(resultado, matrizEsperada)

@@ -25,18 +25,22 @@ class SlidingPuzzle:
 		self.intercambiar(fila,columna, fila+1, columna)
 		print("\n intercambio abajo")
 		self.mostrarPuzzle()
+		return self.matrizPuzzle
 
 	def up(self, fila, columna):
 		self.intercambiar(fila,columna, fila-1, columna)
 		print("\n intercambio arriba")
 		self.mostrarPuzzle()
+		return self.matrizPuzzle
 
 	def left(self, fila, columna):
 		self.intercambiar(fila,columna, fila, columna-1)
 		print("\n intercambio izquierda")
 		self.mostrarPuzzle()
+		return self.matrizPuzzle
 
 	def right(self, fila, columna):
 		self.intercambiar(fila,columna, fila, columna+1)
 		print("\n intercambio derecha")
 		self.mostrarPuzzle()
+		return self.matrizPuzzle
