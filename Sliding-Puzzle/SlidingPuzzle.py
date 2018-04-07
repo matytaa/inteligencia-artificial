@@ -1,7 +1,10 @@
+import collections
+
 class SlidingPuzzle:
 	matrizPuzzle = [[]]
 	filaMostrar = [0,0,0]
 	filaColumnas = 0
+	matrizResultado = [[0,1,2],[3,4,5],[6,7,8]]
 
 	def __init__(self, matrizPuzzle, dimension):
 		self.matrizPuzzle = matrizPuzzle
@@ -44,3 +47,6 @@ class SlidingPuzzle:
 		print("\n intercambio derecha")
 		self.mostrarPuzzle()
 		return self.matrizPuzzle
+
+	def termino(self, unMatriz):
+		return matrizResultado == unMatriz

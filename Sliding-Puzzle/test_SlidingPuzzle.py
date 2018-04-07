@@ -1,4 +1,5 @@
 import unittest
+import collections
 from SlidingPuzzle import SlidingPuzzle
 
 class test_SlidingPuzzle(unittest.TestCase):
@@ -30,3 +31,10 @@ class test_SlidingPuzzle(unittest.TestCase):
 		resultado = self.miPuzzle.up(0,1)
 		matrizEsperada = [[1,0,5],[6,4,7],[2,3,8]]
 		self.assertEqual(resultado, matrizEsperada)
+
+#	def test_recorrer_por_bfs(self):
+#		print("BFS")
+#		resultado = [[1,0,5],[6,4,7],[2,3,8]]
+#		matrizEsperada = [[0,1,2],[3,4,5],[6,7,8]]
+#		self.miPuzzle.bfs(resultado,matrizEsperada)
+#		self.list(bfs(graph, 'A', 'F')) # [['A', 'C', 'F'], ['A', 'B', 'E', 'F']]
