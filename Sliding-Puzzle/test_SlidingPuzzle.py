@@ -35,6 +35,10 @@ class test_SlidingPuzzle(unittest.TestCase):
 	def test_consultar_si_se_resolvio_el_puzzle(self):
 		matrizPuzzle = [[1,0,2],[3,4,5],[6,7,8]]
 		self.miPuzzle = SlidingPuzzle(matrizPuzzle, 3)
+		resultado = self.miPuzzle.mover_hacia_izquierda(0,1)
+		self.assertTrue(self.miPuzzle.termino(resultado))
+		print("TERMINO")
+		print self.miPuzzle.termino(resultado)
 
 #	def test_recorrer_por_bfs(self):
 #		print("BFS")

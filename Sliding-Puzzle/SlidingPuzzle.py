@@ -48,5 +48,5 @@ class SlidingPuzzle:
 		self.mostrarPuzzle()
 		return self.matrizPuzzle
 
-	def termino(self, unMatriz):
-		return matrizResultado == unMatriz
+	def termino(self, unaMatriz):
+		return self.matrizResultado == unaMatriz
