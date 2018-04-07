@@ -47,14 +47,34 @@ class test_SlidingPuzzle(unittest.TestCase):
 		print self.miPuzzle.termino(resultado)
 
 	def test_se_espera_obtener_que_los_movimientos_posibles_sean_4(self):
-		print("No dijiste la palabra magica")
-		
+		print("No dijiste la palabra magica 1")
 		matrizPuzzle = [[1,4,5],[6,0,7],[2,3,8]]
-		matrizEsperada = [[1,4,5],[0,6,7],[2,3,8]]
-		#self.miPuzzle = SlidingPuzzle(matrizPuzzle, 3)
 		cantidaMovimientos = self.miPuzzle.realizar_jugada(matrizPuzzle)
-		#self.assertEqual(cantidaMovimientos, matrizEsperada)
 		self.assertEqual(cantidaMovimientos, 4)
+
+	def test_probando_frontera_superior(self):
+		print("No dijiste la palabra magica 2")
+		matrizPuzzle = [[1,0,5],[6,4,7],[2,3,8]]
+		cantidaMovimientos = self.miPuzzle.realizar_jugada(matrizPuzzle)
+		self.assertEqual(cantidaMovimientos, 3)
+
+	def test_probando_frontera_inferior(self):
+		print("No dijiste la palabra magica 3")
+		matrizPuzzle = [[1,3,5],[6,4,7],[2,0,8]]
+		cantidaMovimientos = self.miPuzzle.realizar_jugada(matrizPuzzle)
+		self.assertEqual(cantidaMovimientos, 3)
+
+	def test_probando_frontera_izquierda_superior(self):
+		print("No dijiste la palabra magica 4")
+		matrizPuzzle = [[0,1,5],[6,4,7],[2,3,8]]
+		cantidaMovimientos = self.miPuzzle.realizar_jugada(matrizPuzzle)
+		self.assertEqual(cantidaMovimientos, 2)
+
+	def test_probando_frontera_derecha(self):
+		print("No dijiste la palabra magica 5")
+		matrizPuzzle = [[1,7,5],[6,4,0],[2,3,8]]
+		cantidaMovimientos = self.miPuzzle.realizar_jugada(matrizPuzzle)
+		self.assertEqual(cantidaMovimientos, 3)
 
 #	def test_recorrer_por_bfs(self):
 #		print("BFS")
