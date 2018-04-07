@@ -1,13 +1,23 @@
 import collections
 
 class NodoPuzzle:
-	dato = None
+	miMatriz = None
+	nodoPadre = None
+	visitado = None
 
-	def __init__(self,datoInicial):
-		self.dato = datoInicial
+	def __init__(self, unaMatriz, unNodoPadre, estadoVisita):
+		self.miMatriz = unaMatriz
+		self.nodoPadre = unNodoPadre
+		self.visitado = estadoVisita
 
 	def obtenerDato(self):
-		return self.dato
+		return self.miMatriz
 
-	def asignarDato(self,nuevodato):
-		self.dato = nuevodato
+	def obtenerNodoPadre(self):
+		return self.nodoPadre
+
+	def fueVisitado(self):
+		return self.visitado
+
+	def asignarMiMatriz(self,nuevomiMatriz):
+		self.miMatriz = nuevomiMatriz
