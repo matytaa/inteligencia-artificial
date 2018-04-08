@@ -1,5 +1,7 @@
 import collections
 import copy
+from NodoPuzzle import NodoPuzzle
+from GenerarId import GenerarId
 
 class SlidingPuzzle:
 	matrizPuzzle = [[]]
@@ -9,6 +11,9 @@ class SlidingPuzzle:
 	exploraciones = 0
 	filaConCero = None
 	columnaConCero = None
+	listaID = []
+	misNodos = []
+	movimiento = []
 
 	def __init__(self, matrizPuzzle, dimension):
 		self.matrizPuzzle = matrizPuzzle
@@ -33,59 +38,106 @@ class SlidingPuzzle:
 			auxiliar = unaMatrizAModificar[fila_nueva][columna_nueva]
 			unaMatrizAModificar[fila_nueva][columna_nueva] = unaMatrizAModificar[fila_original][columna_original]
 			unaMatrizAModificar[fila_original][columna_original] = auxiliar
-		else:
-			print("movimiento no valido")
+		#else:
+			#print("movimiento no valido")
 		return unaMatrizAModificar
 
 	def mover_hacia_abajo(self, fila, columna, unaMatriz):
 		self.intercambiar(fila,columna, fila+1, columna, unaMatriz)
-		print("\n intercambio abajo")
-		self.mostrarPuzzle(unaMatriz)
+		#print("\n intercambio abajo")
+		#self.mostrarPuzzle(unaMatriz)
 		return unaMatriz
 
 	def mover_hacia_arriba(self, fila, columna, unaMatriz):
 		self.intercambiar(fila,columna, fila-1, columna, unaMatriz)
-		print("\n intercambio arriba")
-		self.mostrarPuzzle(unaMatriz)
+		#print("\n intercambio arriba")
+		#self.mostrarPuzzle(unaMatriz)
 		return unaMatriz
 
 	def mover_hacia_izquierda(self, fila, columna, unaMatriz):
 		self.intercambiar(fila,columna, fila, columna-1, unaMatriz)
-		print("\n intercambio izquierda")
-		self.mostrarPuzzle(unaMatriz)
+		#print("\n intercambio izquierda")
+		#self.mostrarPuzzle(unaMatriz)
 		return unaMatriz
 
 	def mover_hacia_derecha(self, fila, columna, unaMatriz):
 		self.intercambiar(fila,columna, fila, columna+1, unaMatriz)
-		print("\n intercambio derecha")
-		self.mostrarPuzzle(unaMatriz)
+		#print("\n intercambio derecha")
+		#self.mostrarPuzzle(unaMatriz)
 		return unaMatriz
 
 	def termino(self, unaMatriz):
 		return self.matrizResultado == unaMatriz
 
-	def realizar_jugada(self, unaMatriz):
+	def incluirEnLista(self, unaMatriz):
+		unId = GenerarId().generar_id(unaMatriz)
+		#self.listaID = [GenerarId().generar_id(unaMatriz)]
+		if unId in self.listaID:
+			return False
+		self.listaID.append(unId)
+		return True
 
-		self.buscarCero(unaMatriz)
-		otra_matriz = copy.deepcopy(unaMatriz)
-		otra_matriz = self.mover_hacia_izquierda(self.filaConCero,self.columnaConCero,otra_matriz)
-		if otra_matriz != unaMatriz :
-			self.exploraciones += 1
-
-		otra_matriz = copy.deepcopy(unaMatriz)
-		otra_matriz = self.mover_hacia_derecha(self.filaConCero,self.columnaConCero,otra_matriz)
-		if otra_matriz != unaMatriz:
-			self.exploraciones += 1
-		
-		otra_matriz = copy.deepcopy(unaMatriz)
-		otra_matriz = self.mover_hacia_arriba(self.filaConCero,self.columnaConCero,otra_matriz)
-		if otra_matriz != unaMatriz:
-			self.exploraciones += 1
-		
-		otra_matriz = copy.deepcopy(unaMatriz)
-		otra_matriz = self.mover_hacia_abajo(self.filaConCero,self.columnaConCero,otra_matriz)
-		if otra_matriz != unaMatriz:
-			self.exploraciones += 1
-
-		return self.exploraciones
+	def incrementarExploraciones(self):
+		self.exploraciones += 1
 	
+	def cantidadExploraciones(self):
+		return self.exploraciones
+
+	def realizar_jugada(self, unaMatriz, unNodo):
+		self.buscarCero(unaMatriz)
+		matriz_jugadas = copy.deepcopy(unaMatriz)
+		self.incluirEnLista(matriz_jugadas)
+		matriz_jugadas = self.mover_hacia_izquierda(self.filaConCero,self.columnaConCero,matriz_jugadas)
+		if matriz_jugadas != unaMatriz :
+			self.incrementarExploraciones()
+			if self.incluirEnLista(matriz_jugadas):
+				self.misNodos.append(NodoPuzzle(matriz_jugadas, unNodo, False))
+
+		matriz_jugadas = copy.deepcopy(unaMatriz)
+		matriz_jugadas = self.mover_hacia_derecha(self.filaConCero,self.columnaConCero,matriz_jugadas)
+		if matriz_jugadas != unaMatriz:
+			self.incrementarExploraciones()
+			if self.incluirEnLista(matriz_jugadas):
+				self.misNodos.append(NodoPuzzle(matriz_jugadas, unNodo, False))
+		
+		matriz_jugadas = copy.deepcopy(unaMatriz)
+		matriz_jugadas = self.mover_hacia_arriba(self.filaConCero,self.columnaConCero,matriz_jugadas)
+		if matriz_jugadas != unaMatriz:
+			self.incrementarExploraciones()
+			if self.incluirEnLista(matriz_jugadas):
+				self.misNodos.append(NodoPuzzle(matriz_jugadas, unNodo, False))
+		
+		matriz_jugadas = copy.deepcopy(unaMatriz)
+		matriz_jugadas = self.mover_hacia_abajo(self.filaConCero,self.columnaConCero,matriz_jugadas)
+		if matriz_jugadas != unaMatriz:
+			self.incrementarExploraciones()
+			if self.incluirEnLista(matriz_jugadas):
+				self.misNodos.append(NodoPuzzle(matriz_jugadas, unNodo, False))
+	
+	def jugar(self, unaMatriz):
+		miNodo = NodoPuzzle(unaMatriz, None, False)
+		self.misNodos.append(miNodo)
+		while True:
+			if len(self.misNodos) == 0: 
+				return None
+			unNodo = self.misNodos.pop(0)
+			if unNodo.obtenerDato() == self.matrizResultado:
+				self.movimiento.insert(0,unNodo)
+				return True
+			unNodo.visitado = True
+			self.realizar_jugada(unNodo.obtenerDato(), unNodo)
+
+	def mostrarSolucion(self):
+		nodoSolucion = self.movimiento.pop(0)
+		matriz_solucion=[]
+		movimiento=[]
+		matriz_solucion.append(nodoSolucion.obtenerDato())
+		unNodoPadre = nodoSolucion.obtenerNodoPadre()
+		while unNodoPadre != None:
+			matriz_solucion.insert(0,unNodoPadre.obtenerDato())
+			unNodoPadre = unNodoPadre.obtenerNodoPadre()
+		
+		for i in range(0, len(matriz_solucion)):
+			print("Movimiento " + str(i))
+			self.mostrarPuzzle(matriz_solucion.pop(0))
+			print("\n")
