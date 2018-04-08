@@ -87,13 +87,38 @@ class test_SlidingPuzzle(unittest.TestCase):
 		cantidaMovimientos = self.miPuzzle.cantidadExploraciones()
 		self.assertEqual(cantidaMovimientos, 3)
 	
-	def test_recorrer_nodo(self):
+	@unittest.skip("testing skipping")
+	def test_jugar_con_matriz_3x3(self):
 		print("No dijiste la palabra magica 1")
 		matrizPuzzle = [[1,4,5],[6,0,7],[2,3,8]]
 		misNodos = NodoPuzzle(matrizPuzzle, None, False)
 		self.assertTrue(self.miPuzzle.jugar(matrizPuzzle))
 		self.miPuzzle.mostrarSolucion()
-		
+
+	@unittest.skip("testing skipping")
+	def test_jugar_con_matriz_3x3(self):
+		print("No dijiste la palabra magica 1")
+		matrizPuzzle = [[0,1,2],[3,4,5],[6,7,8]]
+		misNodos = NodoPuzzle(matrizPuzzle, None, False)
+		self.assertTrue(self.miPuzzle.jugar(matrizPuzzle))
+		self.miPuzzle.mostrarSolucion()
+	
+	
+	def test_jugar_con_matriz_4x4_facil(self):
+		print("No dijiste la palabra magica 2")
+		self.miPuzzle = SlidingPuzzle(self.matrizPuzzle, 4)
+		matrizPuzzle = [[4,1,2,3],[8,5,6,7],[12,9,10,11],[0,13,14,15]]
+		misNodos = NodoPuzzle(matrizPuzzle, None, False)
+		self.assertTrue(self.miPuzzle.jugar(matrizPuzzle))
+		self.miPuzzle.mostrarSolucion()
+
+	def test_jugar_con_matriz_4x4(self):
+		print("No dijiste la palabra magica 2")
+		self.miPuzzle = SlidingPuzzle(self.matrizPuzzle, 4)
+		matrizPuzzle = [[1,2,3,7],[4,5,6,11],[12,9,10,15],[0,13,14,0]]
+		misNodos = NodoPuzzle(matrizPuzzle, None, False)
+		self.assertTrue(self.miPuzzle.jugar(matrizPuzzle))
+		self.miPuzzle.mostrarSolucion()
 
 #	def test_recorrer_por_bfs(self):
 #		print("BFS")

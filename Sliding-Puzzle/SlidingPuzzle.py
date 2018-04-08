@@ -7,7 +7,8 @@ class SlidingPuzzle:
 	matrizPuzzle = [[]]
 	filaMostrar = [0,0,0]
 	filaColumnas = 0
-	matrizResultado = [[0,1,2],[3,4,5],[6,7,8]]
+	matrizResultado_3x3 = [[0,1,2],[3,4,5],[6,7,8]]
+	matrizResultado_4x4 = [[0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]]
 	exploraciones = 0
 	filaConCero = None
 	columnaConCero = None
@@ -20,7 +21,11 @@ class SlidingPuzzle:
 		self.filaColumnas = dimension
 
 	def mostrarPuzzle(self, unaMatriz):
-		self.filaMostrar = [0,0,0]
+		if self.filaColumnas == 3:
+			self.filaMostrar = [0,0,0]
+		elif self.filaColumnas == 4:
+			self.filaMostrar = [0,0,0,0]
+
 		for i in range(self.filaColumnas):
 			for j in range(self.filaColumnas):
 				self.filaMostrar[j] = unaMatriz[i][j]
@@ -67,7 +72,10 @@ class SlidingPuzzle:
 		return unaMatriz
 
 	def termino(self, unaMatriz):
-		return self.matrizResultado == unaMatriz
+		if self.filaColumnas == 3:
+			return self.matrizResultado_3x3 == unaMatriz
+		elif self.filaColumnas == 4:
+			return self.matrizResultado_4x4 == unaMatriz
 
 	def incluirEnLista(self, unaMatriz):
 		unId = GenerarId().generar_id(unaMatriz)
@@ -121,7 +129,8 @@ class SlidingPuzzle:
 			if len(self.misNodos) == 0: 
 				return None
 			unNodo = self.misNodos.pop(0)
-			if unNodo.obtenerDato() == self.matrizResultado:
+			#if unNodo.obtenerDato() == self.matrizResultado_3x3:
+			if self.termino(unNodo.obtenerDato()):
 				self.movimiento.insert(0,unNodo)
 				return True
 			unNodo.visitado = True
