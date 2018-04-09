@@ -15,6 +15,7 @@ class SlidingPuzzle:
 	listaID = []
 	misNodos = []
 	movimiento = []
+	cantidadDeNodos = 0
 
 	def __init__(self, matrizPuzzle, dimension):
 		self.matrizPuzzle = matrizPuzzle
@@ -131,10 +132,12 @@ class SlidingPuzzle:
 			unNodo = self.misNodos.pop(0)
 			#if unNodo.obtenerDato() == self.matrizResultado_3x3:
 			if self.termino(unNodo.obtenerDato()):
+				self.cantidadDeNodos = len(self.misNodos)
 				self.movimiento.insert(0,unNodo)
 				return True
 			unNodo.visitado = True
 			self.realizar_jugada(unNodo.obtenerDato(), unNodo)
+
 
 	def mostrarSolucion(self):
 		nodoSolucion = self.movimiento.pop(0)
@@ -150,3 +153,6 @@ class SlidingPuzzle:
 			print("Movimiento " + str(i))
 			self.mostrarPuzzle(matriz_solucion.pop(0))
 			print("\n")
+		print("Cantidad de posiciones evaluadas: " + str(self.exploraciones))
+		print("Cantidad de nodos: " + str(self.cantidadDeNodos))
+

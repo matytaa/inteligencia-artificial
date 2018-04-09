@@ -26,7 +26,6 @@ class test_NodoPuzzle(unittest.TestCase):
 		matrizBuscada = [[1,4,5],[6,3,7],[2,0,8]]
 		x = np.matrix(matrizBuscada)
 		y = x.tolist()
-		print("HOLA")
 		print y
 
 		temp = NodoPuzzle(matrizPadre, None, False)
@@ -35,6 +34,4 @@ class test_NodoPuzzle(unittest.TestCase):
 		temp3 = NodoPuzzle(matrizArriba, matrizPadre, False)
 		temp4 = NodoPuzzle(matrizAbajo, matrizPadre, False)
 
-
-		print("Mostrar Matriz")
 		print temp.obtenerDato()
