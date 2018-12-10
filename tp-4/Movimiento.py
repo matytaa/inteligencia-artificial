@@ -39,7 +39,7 @@ def realizar_movimiento(i, j, movimiento_a_realizar):
                                     fill="white", width=1)
 
 
-def render_grid():
+def ajustar_grilla():
     global celdas_especiales, paredes, ancho, filas, columnas, jugador
     for i in range(filas):
         for j in range(columnas):

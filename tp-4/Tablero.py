@@ -10,7 +10,7 @@ master = Tk()
 tablero = Canvas(master, width=Movimiento.filas*Movimiento.ancho, height=Movimiento.columnas*Movimiento.ancho)
 jugador = (0, Movimiento.columnas-1)
 
-Movimiento.render_grid()
+Movimiento.ajustar_grilla()
 
 
 def reiniciar_juego():
